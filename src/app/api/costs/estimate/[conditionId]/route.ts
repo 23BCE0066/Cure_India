@@ -26,11 +26,13 @@ interface CostEstimateDetails {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { conditionId: string } }
+  props: { params: Promise<{ conditionId: string }> }
 ) {
   try {
+    const { params } = props
+    const { conditionId } = await params
     const { searchParams } = new URL(request.url)
-    const conditionId = decodeURIComponent(params.conditionId)
+    const decodedConditionId = decodeURIComponent(conditionId)
     const city = searchParams.get('city')
 
     if (!city) {
