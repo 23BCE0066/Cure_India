@@ -16,7 +16,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border-primary;
   }
   body {
     @apply bg-background-primary text-text-primary;
