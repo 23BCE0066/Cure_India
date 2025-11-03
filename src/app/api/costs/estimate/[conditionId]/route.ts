@@ -43,19 +43,19 @@ export async function GET(
     }
 
     // Get base cost estimates from database
-    const baseEstimates = await getCostEstimates(conditionId, city)
+    const baseEstimates = await getCostEstimates(decodedConditionId, city)
 
     // If no specific estimates found, generate based on condition category
     let costDetails: CostEstimateDetails
 
     if (baseEstimates) {
-      costDetails = await generateDetailedCostEstimate(baseEstimates, conditionId, city)
+      costDetails = await generateDetailedCostEstimate(baseEstimates, decodedConditionId, city)
     } else {
-      costDetails = await generateDefaultCostEstimate(conditionId, city)
+      costDetails = await generateDefaultCostEstimate(decodedConditionId, city)
     }
 
     // Get relevant doctors for the condition
-    const specialty = determineSpecialtyForCondition(conditionId)
+    const specialty = determineSpecialtyForCondition(decodedConditionId)
     const doctors = await searchDoctors({
       specialty,
       city,
