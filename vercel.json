@@ -1,0 +1,78 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["hnd1"],
+  "env": {
+    "NEXT_PUBLIC_APP_URL": "@vercel-url"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_ENABLE_VOICE_ANALYSIS": "true",
+      "NEXT_PUBLIC_ENABLE_REPORT_UPLOAD": "true",
+      "NEXT_PUBLIC_ENABLE_MULTILINGUAL": "true",
+      "NEXT_PUBLIC_EMERGENCY_PHONE": "112",
+      "NEXT_PUBLIC_AMBULANCE_PHONE": "108"
+    }
+  },
+  "functions": {
+    "src/app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(self), microphone=(self), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/auth/:path*",
+      "destination": "https://@supabase_project_id.supabase.co/auth/v1/:path*"
+    }
+  ]
+}
