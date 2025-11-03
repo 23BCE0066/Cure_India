@@ -218,24 +218,24 @@ export function capitalizeFirst(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-// Rating display
-export function renderRating(rating: number): JSX.Element {
+// Rating display - returns HTML string for server components
+export function renderRating(rating: number): string {
   const fullStars = Math.floor(rating)
   const hasHalfStar = rating % 1 !== 0
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
 
-  return (
-    <div className="flex items-center gap-1">
-      {[...Array(fullStars)].map((_, i) => (
-        <span key={`full-${i}`} className="text-accent-primary">★</span>
-      ))}
-      {hasHalfStar && <span className="text-accent-primary">☆</span>}
-      {[...Array(emptyStars)].map((_, i) => (
-        <span key={`empty-${i}`} className="text-border-tertiary">★</span>
-      ))}
-      <span className="text-text-secondary ml-1">({rating})</span>
-    </div>
-  )
+  let stars = ''
+  for (let i = 0; i < fullStars; i++) {
+    stars += '<span class="text-accent-primary">★</span>'
+  }
+  if (hasHalfStar) {
+    stars += '<span class="text-accent-primary">☆</span>'
+  }
+  for (let i = 0; i < emptyStars; i++) {
+    stars += '<span class="text-border-tertiary">★</span>'
+  }
+
+  return `${stars}<span class="text-text-secondary ml-1">(${rating})</span>`
 }
 
 // Error handling
