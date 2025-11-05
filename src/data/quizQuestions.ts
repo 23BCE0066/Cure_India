@@ -8,6 +8,21 @@ export interface QuizQuestion {
   difficulty: 'beginner' | 'intermediate' | 'advanced';
 }
 
+export interface GameResults {
+  finalScore: number;
+  totalQuestions: number;
+  correctAnswers: number;
+  difficulty: string;
+  performanceRating: string;
+  answers: {
+    questionId: string;
+    userAnswer: number;
+    correctAnswer: number;
+    isCorrect: boolean;
+    timeTaken: number;
+  }[];
+}
+
 export const quizQuestions: QuizQuestion[] = [
   // Beginner Questions
   {
