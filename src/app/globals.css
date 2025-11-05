@@ -53,4 +53,137 @@
   * {
     transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   }
+
+  /* Quiz-specific styles */
+  .animate-progress-bar {
+    animation: progress-bar 3s linear forwards;
+  }
+
+  @keyframes progress-bar {
+    from {
+      width: 100%;
+    }
+    to {
+      width: 0%;
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .quiz-button {
+    @apply relative overflow-hidden transition-all duration-200;
+  }
+
+  .quiz-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .quiz-button:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .timer-critical {
+    animation: timer-pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes timer-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+  }
+
+  .streak-fire {
+    animation: fire-animation 1s ease-in-out infinite;
+  }
+
+  @keyframes fire-animation {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+    }
+    25% {
+      transform: scale(1.1) rotate(-5deg);
+    }
+    75% {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+
+  .quiz-option {
+    @apply transform transition-all duration-200;
+  }
+
+  .quiz-option:hover:not(.quiz-option-disabled) {
+    @apply scale-105 shadow-lg;
+  }
+
+  .quiz-option-selected {
+    @apply scale-105 shadow-xl ring-2 ring-accent-primary ring-opacity-50;
+  }
+
+  .quiz-option-correct {
+    @apply bg-emergency/10 border-emergency text-emergency animate-pulse;
+  }
+
+  .quiz-option-incorrect {
+    @apply bg-accent-primary/10 border-accent-primary text-accent-primary;
+  }
+
+  .feedback-modal {
+    animation: modal-appear 0.3s ease-out;
+  }
+
+  @keyframes modal-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .points-popup {
+    animation: points-bounce 0.5s ease-out;
+  }
+
+  @keyframes points-bounce {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(-10px) scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-20px) scale(0.8);
+      opacity: 0;
+    }
+  }
+
+  .quiz-gradient-bg {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #252525 100%);
+  }
+
+  .quiz-card {
+    @apply backdrop-blur-sm bg-opacity-90;
+  }
 }
