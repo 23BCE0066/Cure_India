@@ -35,6 +35,16 @@ export default function HomePage() {
             </Link>
           </div>
 
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <Link
+              href="/quiz"
+              className="bg-warning hover:bg-warning/90 text-background-primary font-semibold py-4 px-8 rounded-lg transition-all hover:scale-105 flex items-center justify-center gap-2 animate-pulse-glow"
+            >
+              <Brain className="w-5 h-5" />
+              Play Health Quiz
+            </Link>
+          </div>
+
           <p className="text-sm text-text-muted mb-4">
             ⚠️ This is not a medical diagnosis. Always consult qualified healthcare professionals.
           </p>
