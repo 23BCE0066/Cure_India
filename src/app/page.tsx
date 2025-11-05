@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Mic, Upload, MessageCircle, Heart, Shield, Globe } from 'lucide-react'
+import { Mic, Upload, MessageCircle, Heart, Shield, Globe, Brain } from 'lucide-react'
 
 export default function HomePage() {
   return (
